@@ -10,3 +10,17 @@ function initializeApp() {
     firebase.initializeApp(config);
 }
 
+function writeToDatabase() {
+    var database = firebase.database();
+    database.ref('users/' + 'test').set({
+        username: 'testUser',
+        password: 'password',
+        likes: 0
+    });
+}
+
+function incrementLikes() {
+    firebase.database().ref('users/test/likes').transaction(function(likes) {
+       return likes + 1;
+    });
+}
